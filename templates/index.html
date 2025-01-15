@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrumpLink</title>
+    <link rel="icon" href="static/Tlink.jpg" type="image/jpeg">
+    <style>
+        @font-face {
+            font-family: "BGF";
+            src: url("https://trumplink.vercel.app/static/BGF.ttf");
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            font-size: 3em;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+
+        @keyframes neon-flicker {
+            0%, 49%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .image-container {
+            margin: 20px auto;
+            width: 200px;
+            border: 5px solid #00ff00;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            color: #000;
+            background-color: #00ff00;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .pulse-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00ff00, #008000);
+            animation: pulse 1.5s infinite;
+            color: #000;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            border: none;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px #00ff00;
+            }
+        }
+
+        .chatbox {
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            background-color: #000;
+            border: 5px solid #00ff00;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00ff00;
+            font-family: "BGF";
+            font-size: 1.2em;
+            color: #00ff00;
+        }
+
+        .social-buttons a {
+            text-decoration: none;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="title">TrumpLink</h1>
+
+    <div class="image-container">
+        <img src="static/Tlink.jpg" alt="TLink">
+    </div>
+
+    <button class="button" onclick="copyContractAddress()">Copy Contract Address</button>
+
+    <button class="pulse-button" onclick="telepathToTLink()">Telepath</button>
+
+    <div id="output" class="chatbox" style="display: none;">
+        <!-- Groq output will appear here -->
+    </div>
+
+    <div class="social-buttons">
+        <a href="https://t.me" target="_blank"><button class="button">Telegram</button></a>
+        <a href="https://twitter.com" target="_blank"><button class="button">Twitter</button></a>
+        <a href="https://dexscreener.com" target="_blank"><button class="button">DexScreener</button></a>
+    </div>
+
+    <script>
+        function copyContractAddress() {
+            const address = "asdsadsakdasdpump";
+            navigator.clipboard.writeText(address).then(() => {
+                alert("Contract address copied to clipboard!");
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        }
+
+        function telepathToTLink() {
+            fetch("/random_joke")
+                .then(response => response.json())
+                .then(data => {
+                    const outputBox = document.getElementById("output");
+                    outputBox.style.display = "block";
+                    outputBox.innerText = data.joke || "No response received.";
+                })
+                .catch(err => {
+                    console.error("Error: ", err);
+                });
+        }
+    </script>
+
+</body>
+</html>
